@@ -1,40 +1,31 @@
-from collections import defaultdict, deque
-
 class Solution(object):
     def minJumps(self, arr):
-        n = len(arr)
-
-        if n == 1:
-            return 0
-
-        mp = defaultdict(list)
-
-        for i in range(n):
-            mp[arr[i]].append(i)
-
-        q = deque([0])
-        visited = set([0])
-
-        steps = 0
-
-        while q:
-            size = len(q)
-
-            for _ in range(size):
-                idx = q.popleft()
-
-                if idx == n - 1:
-                    return steps
-
-                neighbors = mp[arr[idx]] + [idx - 1, idx + 1]
-
-                for nei in neighbors:
-                    if 0 <= nei < n and nei not in visited:
-                        visited.add(nei)
-                        q.append(nei)
-
-                mp[arr[idx]] = []
-
-            steps += 1
-
-        return -1
+        dic={}
+        for i in range(len(arr)):
+            if arr[i] not in dic:
+                dic[arr[i]]=[i]
+            else:
+                dic[arr[i]].append(i)
+        st=[0]
+        visited=[0]*len(arr)
+        ans=0
+        visited[0]=1
+        while st:
+            k=[]
+            if visited[-1]==1:return ans
+            ans+=1
+            for i in st:
+                if i!=0 and visited[i-1]==0:
+                    
+                    k.append(i-1)
+                    visited[i-1]=1
+                if i!=len(arr)-1 and visited[i+1]==0:
+                    k.append(i+1)
+                    visited[i+1]=1
+                if arr[i] in dic:
+                    for j in dic[arr[i]]:
+                        if visited[j]==0:
+                            k.append(j)
+                            visited[j]=1
+                    del dic[arr[i]]
+            st=k
