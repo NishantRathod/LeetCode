@@ -1,9 +1,13 @@
 class Solution(object):
     def twoSum(self, numbers, target):
         n = len(numbers)
-        dict1 = {}
-        for i in range(n):
-            rem = target - numbers[i]
-            if rem in dict1:
-                return [dict1[rem],i+1]
-            dict1[numbers[i]] = i+1
+        ans = []
+        i = 0
+        j = n - 1
+        while i < j:
+            if numbers[i] + numbers[j] == target:
+                return [i+1,j+1]
+            elif numbers[i] + numbers[j] > target:
+                j -= 1
+            else:
+                i += 1
