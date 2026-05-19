@@ -1,10 +1,15 @@
 class Solution(object):
     def lengthOfLastWord(self, s):
-        length = 0
-        i = len(s) - 1
-        while i >= 0 and s[i] == ' ':
-            i -= 1
-        while i >= 0 and s[i] != ' ':
-            length += 1
-            i -= 1
-        return length
+        n = len(s)
+        cnt = 0
+        spaceCnt = 0
+        for i in range(n-1,-1,-1):
+            x = ord(s[i])
+            if x == 32 and cnt==0:
+                continue
+            if (x >= 65 and x <= 90) or (x >= 97 and x <= 122):
+                cnt += 1
+                spaceCnt = 1
+            else:
+                break
+        return cnt
