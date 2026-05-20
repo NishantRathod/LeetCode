@@ -3,16 +3,24 @@ class Solution(object):
         if numRows == 1 or numRows >= len(s):
             return s
 
-        rows = [""] * numRows
-        curr_row = 0
-        direction = -1
+        rows = [[] for _ in range(numRows)]
+
+        row = 0
+        step = 1
 
         for ch in s:
-            rows[curr_row] += ch
+            rows[row].append(ch)
 
-            if curr_row == 0 or curr_row == numRows - 1:
-                direction *= -1
+            if row == 0:
+                step = 1
+            elif row == numRows - 1:
+                step = -1
 
-            curr_row += direction
+            row += step
 
-        return "".join(rows)
+        ans = []
+
+        for r in rows:
+            ans.extend(r)
+
+        return "".join(ans)
