@@ -1,15 +1,18 @@
 class Solution(object):
     def maxArea(self, height):
-        i = 0
-        j = len(height) - 1
+        n = len(height)
+
+        left = 0
+        right = n - 1
         maxWater = 0
-        while i < j:
-            width = j-i
-            ht = min(height[i],height[j])
-            currWater = width * ht
-            maxWater = max(maxWater , currWater)
-            if(height[i]<height[j]):
-                i += 1
+        while left < right:
+            minHeight = min(height[left],height[right])
+            width = right - left
+            water = minHeight * width
+            maxWater = max(water,maxWater)
+            if height[left] < height[right]:
+                left += 1
             else:
-                j -= 1
+                right -= 1
+
         return maxWater
