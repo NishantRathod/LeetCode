@@ -3,14 +3,14 @@ class Solution(object):
         res = []
         n = len(nums)
 
-        def backtrack(start):
-            if start == n:
+        def backtrack(idx):
+            if idx == n:
                 res.append(nums[:])
                 return
-            for i in range(start, n):
-                nums[start], nums[i] = nums[i], nums[start]
-                backtrack(start + 1)
-                nums[start], nums[i] = nums[i], nums[start]
+            for i in range(idx,len(nums)):
+                nums[idx] , nums[i] = nums[i], nums[idx]
+                backtrack(idx+1)
+                nums[idx] , nums[i] = nums[i], nums[idx]
 
         backtrack(0)
         return res
