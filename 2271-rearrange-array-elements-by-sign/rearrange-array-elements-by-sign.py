@@ -1,23 +1,18 @@
 class Solution(object):
     def rearrangeArray(self, nums):
-        n = len(nums)
-        arr1 = []
-        arr2 = []
-        ans = []
+        ans = [0] * len(nums)
+
+        positive = 0
+        negative = 1
+
         for i in nums:
             if i > 0:
-                arr1.append(i)
-
-            if i < 0:
-                arr2.append(i)
-
-        maxsize = max(len(arr1),len(arr2))
-
-        for i in range(maxsize):
-            if i < len(arr1): 
-                ans.append(arr1[i])
-
-            if i < len(arr2):
-                ans.append(arr2[i])
-
+                ans[positive] = i
+                positive += 2
+            
+            else:
+                ans[negative] = i
+                negative += 2
+        
         return ans
+        
